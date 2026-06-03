@@ -15,13 +15,14 @@ WORKDIR /var/www
 # 3. Copie des fichiers du projet
 COPY . .
 
-# 4. Installation avec limitation de mémoire pour éviter le crash "Out of Memory"
+# 4. Installation avec contournement des blocages de plateforme
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
     --no-dev \
     --optimize-autoloader \
     --no-interaction \
     --no-scripts \
-    --prefer-dist
+    --prefer-dist \
+    --ignore-platform-reqs
 
 # 5. Gestion stricte des permissions pour éviter l'erreur de cache
 # On donne la propriété des fichiers à l'utilisateur www-data (le serveur web)
