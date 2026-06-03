@@ -15,9 +15,9 @@ WORKDIR /var/www
 # 3. Copie des fichiers du projet
 COPY . .
 
-# 4. Nettoyage et installation sur une seule ligne avec logs détaillés (-vvv)
+# 4. Installation propre sans fioritures
 RUN rm -f composer.lock
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --prefer-dist --ignore-platform-reqs -vvv
+RUN composer install --no-dev --no-interaction --no-scripts
 
 # 5. Gestion stricte des permissions pour éviter l'erreur de cache
 # On donne la propriété des fichiers à l'utilisateur www-data (le serveur web)
