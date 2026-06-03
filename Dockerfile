@@ -30,8 +30,6 @@ RUN chown -R www-data:www-data /var/www \
 
 EXPOSE 8000
 
-# 6. Commande de démarrage adaptée à Laravel 11
-# On ajoute '&& php artisan route:cache' uniquement si tu as des routes web classiques
-CMD php artisan config:cache && \
-    php artisan view:cache && \
-    php artisan serve --host=0.0.0.0 --port=8000
+
+# 6. Commande de démarrage finale propre et compatible
+CMD php artisan migrate --force && php artisan config:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=8000
