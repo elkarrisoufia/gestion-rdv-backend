@@ -15,8 +15,9 @@ WORKDIR /var/www
 # 3. Copie des fichiers du projet
 COPY . .
 
-# 4. Installation avec contournement des blocages de plateforme
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
+# 4. Suppression du lock local et installation propre
+RUN rm -f composer.lock && \
+    COMPOSER_MEMORY_LIMIT=-1 composer install \
     --no-dev \
     --optimize-autoloader \
     --no-interaction \
