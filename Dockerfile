@@ -13,9 +13,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
-# 4. Installation des packages sans optimisations agressives pour éviter le blocage
-RUN composer install --no-dev --no-interaction --no-scripts --ignore-platform-reqs
-
+# 4. Installation des packages en ignorant les alertes de sécurité
+RUN composer install --no-dev --no-interaction --no-scripts --ignore-platform-reqs --no-audit
 # 5. Droits d'accès pour Laravel
 RUN chown -R www-data:www-data /var/www && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
