@@ -34,4 +34,4 @@ EXPOSE 8000
 # On ajoute '&& php artisan route:cache' uniquement si tu as des routes web classiques
 CMD php artisan config:cache && \
     php artisan view:cache && \
-    php artisan serve --host=0.0.0.0 --port=80000
+    php artisan serve --host=0.0.0.0 --port=8000
