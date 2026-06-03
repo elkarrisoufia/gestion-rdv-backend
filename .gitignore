@@ -2,7 +2,6 @@
 /.env
 /storage/logs/*.log
 /bootstrap/cache/*.php
-composer.lock
 node_modules/
 .env
 .env.backup
