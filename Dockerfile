@@ -15,15 +15,9 @@ WORKDIR /var/www
 # 3. Copie des fichiers du projet
 COPY . .
 
-# 4. Suppression du lock local et installation propre
-RUN rm -f composer.lock && \
-    COMPOSER_MEMORY_LIMIT=-1 composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction \
-    --no-scripts \
-    --prefer-dist \
-    --ignore-platform-reqs
+# 4. Nettoyage et installation sur une seule ligne avec logs détaillés (-vvv)
+RUN rm -f composer.lock
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --prefer-dist --ignore-platform-reqs -vvv
 
 # 5. Gestion stricte des permissions pour éviter l'erreur de cache
 # On donne la propriété des fichiers à l'utilisateur www-data (le serveur web)
