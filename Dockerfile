@@ -15,8 +15,13 @@ WORKDIR /var/www
 # 3. Copie des fichiers du projet
 COPY . .
 
-# 4. Installation des dépendances Laravel sans les packages de dev
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# 4. Installation avec limitation de mémoire pour éviter le crash "Out of Memory"
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction \
+    --no-scripts \
+    --prefer-dist
 
 # 5. Gestion stricte des permissions pour éviter l'erreur de cache
 # On donne la propriété des fichiers à l'utilisateur www-data (le serveur web)
@@ -25,10 +30,8 @@ RUN chown -R www-data:www-data /var/www \
 
 EXPOSE 8000
 
-# 6. Commande de démarrage sécurisée
-# Note : Les migrations se font généralement via l'interface de l'hébergeur, 
-# mais si tu dois les laisser ici, on retire au moins le db:seed automatique.
+# 6. Commande de démarrage adaptée à Laravel 11
+# On ajoute '&& php artisan route:cache' uniquement si tu as des routes web classiques
 CMD php artisan config:cache && \
-    php artisan route:cache && \
     php artisan view:cache && \
-    php artisan serve --host=0.0.0.0 --port=8000
+    php artisan serve --host=0.0.0.0 --port=80000
