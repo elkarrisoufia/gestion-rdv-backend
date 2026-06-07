@@ -6,7 +6,7 @@ return [
         'http://localhost:5173',
         'http://localhost:3000',
         'https://gestion-rdv-frontend.vercel.app',
-        'https://gestion-rdv-frontend-git-main-soufiae-s-projects.vercel.app',
+        'https://gestion-rdv-frontend-dtloxmvbm-soufiae-s-projects.vercel.app',
     ],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
