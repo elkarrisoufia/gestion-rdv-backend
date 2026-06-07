@@ -8,7 +8,7 @@ return [
         'https://gestion-rdv-frontend.vercel.app',
         'https://gestion-rdv-frontend-dtloxmvbm-soufiae-s-projects.vercel.app',
     ],
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['#^https://gestion-rdv-frontend.*\.vercel\.app$#',],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
     'max_age' => 0,
